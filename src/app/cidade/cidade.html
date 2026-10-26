@@ -1,0 +1,110 @@
+<div class="container py-4">
+  <h1 class="h3 text-primary mb-1">Cadastro de Cidades</h1>
+  <p class="text-body-secondary">Preencha o formulário para incluir uma cidade na lista.</p>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white fw-semibold">Nova cidade</div>
+    <div class="card-body">
+      <form [formGroup]="formCidade" (ngSubmit)="cadastrar()" novalidate>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="nome">Nome</label>
+            <input
+              id="nome"
+              type="text"
+              class="form-control"
+              [class.is-invalid]="campoInvalido('nome')"
+              formControlName="nome"
+              placeholder="Ex.: Jacareí"
+            />
+            <div class="invalid-feedback">Informe o nome da cidade.</div>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label class="form-label" for="uf">UF</label>
+            <input
+              id="uf"
+              type="text"
+              class="form-control text-uppercase"
+              [class.is-invalid]="campoInvalido('uf')"
+              formControlName="uf"
+              maxlength="2"
+              placeholder="SP"
+            />
+            <div class="invalid-feedback">UF com 2 letras.</div>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label class="form-label" for="ddd">DDD</label>
+            <input
+              id="ddd"
+              type="number"
+              class="form-control"
+              [class.is-invalid]="campoInvalido('ddd')"
+              formControlName="ddd"
+              placeholder="12"
+            />
+            <div class="invalid-feedback">DDD entre 11 e 99.</div>
+          </div>
+
+          <div class="col-12 col-md-2">
+            <label class="form-label" for="populacao">População</label>
+            <input
+              id="populacao"
+              type="number"
+              class="form-control"
+              [class.is-invalid]="campoInvalido('populacao')"
+              formControlName="populacao"
+              placeholder="220000"
+            />
+            <div class="invalid-feedback">População maior que zero.</div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-4">
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="limpar()">Limpar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 class="h5 mb-0">Cidades cadastradas</h2>
+    <span class="badge text-bg-secondary">{{ cidades.length }}</span>
+  </div>
+
+  @if (cidades.length === 0) {
+    <div class="alert alert-info mb-0" role="alert">
+      Nenhuma cidade cadastrada até o momento.
+    </div>
+  } @else {
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      @for (cidade of cidades; track cidade.id) {
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h3 class="card-title h5 mb-0">{{ cidade.nome }}</h3>
+                <span class="badge text-bg-primary">{{ cidade.uf }}</span>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between px-0">
+                  <span class="text-body-secondary">População</span>
+                  <strong>{{ cidade.populacao }}</strong>
+                </li>
+                <li class="list-group-item d-flex justify-content-between px-0">
+                  <span class="text-body-secondary">DDD</span>
+                  <strong>{{ cidade.ddd }}</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent small text-body-secondary">
+              Código #{{ cidade.id }}
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
