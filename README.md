@@ -1,59 +1,130 @@
-# CadastroCidades
+# Cadastro de Cidades
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+Projeto da disciplina da faculdade — **Aula 04 (Exercício Cidades)**.
 
-## Development server
+Aplicação web feita em **Angular** com **Bootstrap** que permite **cadastrar cidades** e
+**ver todas as cidades cadastradas** em uma lista de cards.
 
-To start a local development server, run:
+> Curso: Análise e Desenvolvimento de Sistemas (FATEC) — 2º semestre
+> Autor: Bruno Mattos
+
+---
+
+## O que o programa faz
+
+- Tem um **formulário** para digitar os dados de uma cidade.
+- Confere se os campos foram preenchidos corretamente antes de salvar.
+- Mostra cada cidade cadastrada dentro de um **card** do Bootstrap.
+- Limpa o formulário depois de cadastrar, para já poder digitar a próxima cidade.
+- Mostra uma mensagem quando ainda não existe nenhuma cidade na lista.
+
+Os dados ficam **apenas na memória do navegador**. Ou seja, se você atualizar a página (F5),
+a lista volta a ficar vazia — isso é normal nesse exercício, porque ainda não temos banco de dados.
+
+---
+
+## Dados cadastrados
+
+Cada cidade guarda 5 informações:
+
+| Informação | Exemplo |
+|---|---|
+| id (número de controle) | 1 |
+| nome | Jacareí |
+| uf | SP |
+| população | 235000 |
+| ddd | 12 |
+
+O campo **id** não é digitado: o próprio programa gera esse número na hora de cadastrar.
+
+---
+
+## Tecnologias usadas
+
+- **Angular 22** — framework usado para montar a tela.
+- **Bootstrap 5** — usado para o visual (caixas, botões e os cards).
+- **TypeScript** — linguagem do código (é um JavaScript com tipos).
+- **Node.js** — necessário para rodar e instalar o projeto.
+
+---
+
+## Como rodar o projeto no seu computador
+
+### 1. Você precisa ter instalado
+
+- [Node.js](https://nodejs.org/) (de preferência uma versão recente)
+- Um editor de código, como o [VS Code](https://code.visualstudio.com/)
+
+Para conferir se o Node foi instalado, abra o terminal e digite:
 
 ```bash
-ng serve
+node -v
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Se aparecer um número de versão (por exemplo `v22.0.0`), está tudo certo.
 
-## Code scaffolding
+### 2. Baixar as dependências
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Dentro da pasta do projeto, rode:
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Esse comando baixa tudo que o projeto precisa para funcionar. Ele demora um pouco na primeira vez
+e só precisa ser rodado uma vez.
+
+### 3. Ligar o projeto
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Depois abra o navegador em: **http://localhost:4200**
 
-To build the project run:
+Para parar o projeto, volte ao terminal e aperte `Ctrl + C`.
 
-```bash
-ng build
+---
+
+## Como usar
+
+1. Preencha os campos **Nome**, **UF**, **DDD** e **População**.
+2. Clique em **Cadastrar**.
+3. O card da cidade aparece logo abaixo, na lista.
+4. Se algum campo estiver errado ou vazio, o próprio formulário avisa em vermelho.
+5. O botão **Limpar** apaga o que você digitou sem cadastrar nada.
+
+---
+
+## Onde fica cada parte do código
+
+```
+src/app/
+├── app-module.ts          -> arquivo de configuração da aplicação
+├── app.html               -> chama a tela de cidades
+├── cidade/
+│   ├── cidade.ts          -> a lógica: recebe os dados e guarda na lista
+│   └── cidade.html        -> a tela: o formulário e os cards
+└── interfaces/
+    └── cidade.ts          -> a lista de campos que uma cidade precisa ter
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Conceitos que pratiquei neste exercício
 
-## Running unit tests
+- Criar uma aplicação Angular no modo **módulos** (`--no-standalone`).
+- Configurar o **Bootstrap** em um projeto Angular.
+- Usar **formulário reativo**, que é o formulário controlado pelo próprio código.
+- Criar uma **interface** para definir o formato dos dados.
+- Criar um **componente** e colocá-lo dentro da tela principal.
+- Usar `@if` (mostrar ou esconder algo) e `@for` (repetir algo para cada item da lista).
+- Montar uma lista usando os **cards** do Bootstrap.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## Comandos úteis
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Comando | Para que serve |
+|---|---|
+| `npm start` | Liga o projeto para você ver no navegador |
+| `npm run build` | Gera a versão final do projeto, na pasta `dist/` |
+| `npm test` | Roda os testes automáticos do projeto |
